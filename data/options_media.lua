@@ -135,6 +135,40 @@ function addon:PrepareFontMenuItems()
 		keepShownOnClick = true,
 		onSelect = ApplySharedFont,
 	}) or nil
+
+	if addon._fontMenuItems then
+		local function InjectPreviews(items)
+			for _, item in ipairs(items) do
+				if type(item.children) == "table" then
+					InjectPreviews(item.children)
+				elseif item.value ~= nil then
+					item.onEnter = function()
+						if item.value then
+							local tempStyles = {}
+							for _, styleDef in ipairs(styleDefs) do
+								local nextStyle = Fonts:NormalizeStyle(self.db.global[styleDef.key] or styleDef.default)
+								nextStyle.font = item.value
+								tempStyles[styleDef.key] = nextStyle
+							end
+							Fonts:ApplyStyleMap({
+								titleText = BattlePetUtilityFontTitle,
+								normalText = BattlePetUtilityFontNormal,
+								smallText = BattlePetUtilityFontSmall,
+							}, tempStyles)
+						end
+					end
+					item.onLeave = function()
+						Fonts:ApplyStyleMap({
+							titleText = BattlePetUtilityFontTitle,
+							normalText = BattlePetUtilityFontNormal,
+							smallText = BattlePetUtilityFontSmall,
+						}, self.db.global)
+					end
+				end
+			end
+		end
+		InjectPreviews(addon._fontMenuItems)
+	end
 end
 
 function addon:GetCurrentFontSize()

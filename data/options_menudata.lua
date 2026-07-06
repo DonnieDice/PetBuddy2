@@ -44,6 +44,8 @@ function addon:GetPrimaryMenuData()
 			end,
 			checked = function() return self.db.global.barTexture == barName end,
 			keepShownOnClick = true,
+			onEnter = function() addon:RefreshMedia(nil, barName) end,
+			onLeave = function() addon:RefreshMedia(nil, self.db.global.barTexture) end,
 		})
 	end
 
