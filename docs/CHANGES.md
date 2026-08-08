@@ -1,3 +1,10 @@
+# v2.3.21 - 2026-08-08
+
+## Changes
+- **Minimap API update**: `RGX:CreateMinimapButton()` → `RGXMinimap:Create()` (new API)
+- Slash commands already use `RGX:RegisterSlashCommand`
+- Database already uses `RGX:NewDatabase()`
+
 # Unreleased
 
 ## Fixes

@@ -10,7 +10,7 @@ local function GetMinimapStorage()
 end
 
 function addon:InitializeMinimapIcon()
-    self.minimapBtn = RGX:CreateMinimapButton({
+    self.minimapBtn = RGXMinimap:Create({
         name         = "BattlePetUtilityMinimapButton",
         icon         = self.LOGO_TEXTURE or "Interface\\AddOns\\BattlePetUtility\\media\\logo.tga",
         defaultAngle = DEFAULT_ANGLE,
