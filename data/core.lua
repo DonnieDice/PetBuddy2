@@ -17,6 +17,7 @@ addon.ADDON_TITLE_COMPACT_COLORED = "|cffb512fcB|r|cffffffffattle|r|cffb512fcP|r
 local E = addon.E;
 local unpackFunc = unpack or table.unpack;
 local RGX = assert(_G.RGXFramework, "BattlePetUtility: RGX-Framework not loaded");
+local PetBattles = RGX:GetPetBattles();
 local PET_TYPE_TEXTURE_SUFFIX = {
 	[1] = "Humanoid",
 	[2] = "Dragon",
@@ -798,7 +799,7 @@ function addon:SyncUtilityMenuState()
 end
 
 function BattlePetUtilityFrame_OnMouseWheel(self, delta)
-	if(InCombatLockdown() or C_PetBattles.IsInBattle()) then return end
+	if(InCombatLockdown() or PetBattles:IsInBattle()) then return end
 
 	local cycle = { 0, 1, 3, 2 };
 	local menuState = tonumber(addon.db.global.PetUtilityMenuState) or 0;
@@ -1133,7 +1134,7 @@ end
 function addon:_DoUpdatePets()
   local minimized = self:IsFrameMinimized();
   local hideMain = self.db and self.db.global.HideMainGUI == true;
-  if(not PetsBattleData and C_PetBattles.IsInBattle()) then
+  if(not PetsBattleData and PetBattles:IsInBattle()) then
     addon:UpdateBattleData();
   end
 
@@ -1150,8 +1151,8 @@ function addon:_DoUpdatePets()
 		local realSlotIndex = slotIndex;
 		local battleIndex = slotIndex;
 		
-		if(C_PetBattles.IsInBattle()) then
-			if(slotIndex > C_PetBattles.GetNumPets(1)) then
+		if(PetBattles:IsInBattle()) then
+			if(slotIndex > PetBattles:GetNumPets(1)) then
 				hasActivePetInSlot = false;
 			elseif(PetsBattleData[slotIndex]) then
 				realSlotIndex = PetsBattleData[slotIndex].slotIndex;
@@ -1185,13 +1186,13 @@ function addon:_DoUpdatePets()
 					petFrame.glowHighlight:Hide();
 				end
 				
-				if(C_PetBattles.IsInBattle()) then
-					health = C_PetBattles.GetHealth(1, battleIndex);
-					maxHealth = C_PetBattles.GetMaxHealth(1, battleIndex);
+				if(PetBattles:IsInBattle()) then
+					health = PetBattles:GetHealth(1, battleIndex);
+					maxHealth = PetBattles:GetMaxHealth(1, battleIndex);
 					
 					isDead = (health == 0);
 					
-					local activePetIndex = C_PetBattles.GetActivePet(1);
+					local activePetIndex = PetBattles:GetActivePet(1);
 					if(activePetIndex == battleIndex) then
 						petFrame.glowHighlight:Show();
 					end
@@ -1569,7 +1570,7 @@ function BattlePetUtilityFrameDragButton_OnClick(self, button)
 	else
 		local petID = self:GetParent().petID;
 		if(petID) then
-			if(button == "LeftButton" and not C_PetBattles.IsInBattle()) then
+			if(button == "LeftButton" and not PetBattles:IsInBattle()) then
 				-- C_PetJournal.PickupPet(petID);
 				
 			elseif(button == "MiddleButton" and not InCombatLockdown()) then
@@ -1604,7 +1605,7 @@ function BattlePetUtilityFrameDragButton_OnDragStart(self)
 		return;
 	end
 
-	if(not C_PetBattles.IsInBattle()) then
+	if(not PetBattles:IsInBattle()) then
 		C_PetJournal.PickupPet(petID);
 		-- Remember the slot the pet was picked up from so OnReceiveDrag can
 		-- perform a swap between two loadout slots.
@@ -1870,7 +1871,7 @@ function addon:PLAYER_REGEN_ENABLED()
 end
 
 function addon:CURSOR_UPDATE()
-	if(C_PetBattles.IsInBattle()) then return end
+	if(PetBattles:IsInBattle()) then return end
 	
 	addon.CursorUpdateTimer = addon:ScheduleTimer(function()
 		local lastCursor = addon.CurrentCursor;

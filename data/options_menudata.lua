@@ -1,5 +1,6 @@
 local ADDON_NAME, addon = ...
 local E = addon.E
+local PetBattles = _G.RGXFramework:GetPetBattles()
 
 local Fonts = _G.RGXFonts
 
@@ -310,7 +311,7 @@ function addon:GetPrimaryMenuData()
 				local state = tonumber(self.db.global.PetUtilityMenuState) or 0
 				return state == 2 or state == 3
 			end,
-			disabled = C_PetBattles.IsInBattle(),
+			disabled = PetBattles:IsInBattle(),
 			isNotRadio = true,
 			keepShownOnClick = true,
 		},
@@ -330,7 +331,7 @@ function addon:GetPrimaryMenuData()
 			isNotRadio = true,
 			hasArrow = true,
 			keepShownOnClick = true,
-			disabled = C_PetBattles.IsInBattle(),
+			disabled = PetBattles:IsInBattle(),
 			menuList = addon:GetPetItemsUtilityMenuData(),
 		},
 		{

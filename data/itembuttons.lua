@@ -8,6 +8,7 @@
 
 local ADDON_NAME, addon = ...;
 local RGX = _G.RGXFramework;
+local PetBattles = RGX:GetPetBattles();
 local unpackFunc = unpack or table.unpack;
 
 local ITEM_BUTTON_CATEGORIES = {
@@ -375,7 +376,7 @@ function addon:GetPetItemCategoryMenuData(includeTitle)
 					return addon:IsPetItemCategoryEnabled(category.key);
 				end,
 				isNotRadio = true,
-				disabled = C_PetBattles.IsInBattle(),
+				disabled = PetBattles:IsInBattle(),
 			});
 		end
 	end
