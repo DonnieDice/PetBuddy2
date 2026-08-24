@@ -14,7 +14,7 @@
 
 ## X-Category: UI Media, Pets & Companions, Miscellaneous
 ## X-Curse-Project-ID: 1476629
-## X-Website: https://github.com/donniedice/BattlePetUtility
+## X-Website: https://github.com/RGXMods/BattlePetUtility
 
 data/compat.lua
 
