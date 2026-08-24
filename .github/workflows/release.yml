@@ -193,7 +193,7 @@ jobs:
               color=11866876
               footer="RGX Mods - Stable Release"
               description="A new stable release is live. Manage your pet collection with ease!"
-              release_url="https://github.com/DonnieDice/BattlePetUtility/releases/tag/${version}"
+              release_url="https://github.com/RGXMods/BattlePetUtility/releases/tag/${version}"
               downloads="[CurseForge](https://www.curseforge.com/wow/addons/BattlePetUtility) - [GitHub](${release_url})"
               channel="Release"
               ;;
@@ -202,7 +202,7 @@ jobs:
               color=16744448
               footer="RGX Mods - Beta Build"
               description="Beta build available for testing."
-              release_url="https://github.com/DonnieDice/BattlePetUtility/releases/tag/${version}"
+              release_url="https://github.com/RGXMods/BattlePetUtility/releases/tag/${version}"
               downloads="[CurseForge](https://www.curseforge.com/wow/addons/BattlePetUtility) - [GitHub](${release_url})"
               channel="Beta"
               ;;
@@ -211,7 +211,7 @@ jobs:
               color=9109504
               footer="RGX Mods - Alpha Build"
               description="Alpha build available for testing."
-              release_url="https://github.com/DonnieDice/BattlePetUtility/tree/alpha"
+              release_url="https://github.com/RGXMods/BattlePetUtility/tree/alpha"
               downloads="[GitHub Alpha Branch](${release_url})"
               channel="Alpha"
               ;;
@@ -220,7 +220,7 @@ jobs:
               color=3447003
               footer="RGX Mods - Dev Build"
               description="Development build from the dev branch."
-              release_url="https://github.com/DonnieDice/BattlePetUtility/tree/dev"
+              release_url="https://github.com/RGXMods/BattlePetUtility/tree/dev"
               downloads="[GitHub Dev Branch](${release_url})"
               channel="Dev"
               ;;
@@ -229,7 +229,7 @@ jobs:
               color=10000000
               footer="RGX Mods"
               description="Build completed."
-              release_url="https://github.com/DonnieDice/BattlePetUtility/releases"
+              release_url="https://github.com/RGXMods/BattlePetUtility/releases"
               downloads="[GitHub](${release_url})"
               channel="Unknown"
               ;;
@@ -237,13 +237,13 @@ jobs:
 
           jq -n \
             --arg username "BPU Releases" \
-            --arg avatar_url "https://raw.githubusercontent.com/DonnieDice/BattlePetUtility/main/media/logo.png" \
+            --arg avatar_url "https://raw.githubusercontent.com/RGXMods/BattlePetUtility/main/media/logo.png" \
             --arg title "$title" \
             --arg url "$release_url" \
             --arg description "$description" \
             --argjson color "$color" \
             --arg footer "$footer" \
-            --arg icon_url "https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/media/kiwi.gif" \
+            --arg icon_url "https://raw.githubusercontent.com/RGXMods/SimpleQuestPlates/main/media/kiwi.gif" \
             --arg timestamp "${RELEASE_TIMESTAMP}" \
             --arg summary "$summary" \
             --arg downloads "$downloads" \
@@ -282,19 +282,19 @@ jobs:
             --arg timestamp "$timestamp" \
             '{
               username: "BPU Build Failed",
-              avatar_url: "https://raw.githubusercontent.com/DonnieDice/BattlePetUtility/main/media/logo.png",
+              avatar_url: "https://raw.githubusercontent.com/RGXMods/BattlePetUtility/main/media/logo.png",
               embeds: [{
                 title: "BattlePetUtility Build Failed",
                 description: "The release workflow encountered an error",
-                url: ("https://github.com/DonnieDice/BattlePetUtility/actions/runs/" + $run_id),
+                url: ("https://github.com/RGXMods/BattlePetUtility/actions/runs/" + $run_id),
                 color: 15158332,
                 fields: [
                   { name: "Version", value: $version, inline: true },
-                  { name: "Workflow", value: ("https://github.com/DonnieDice/BattlePetUtility/actions/runs/" + $run_id), inline: true }
+                  { name: "Workflow", value: ("https://github.com/RGXMods/BattlePetUtility/actions/runs/" + $run_id), inline: true }
                 ],
                 footer: {
                   text: "RGX Mods - Build System",
-                  icon_url: "https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/media/kiwi.gif"
+                  icon_url: "https://raw.githubusercontent.com/RGXMods/SimpleQuestPlates/main/media/kiwi.gif"
                 },
                 timestamp: $timestamp
               }]
