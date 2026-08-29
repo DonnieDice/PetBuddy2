@@ -23,3 +23,14 @@ BattlePetUtility is a Retail-only WoW addon for battle-pet loadouts, pet-related
 - Match the existing tab indentation and semicolon-terminated style in `data/`.
 - There is no standalone build or automated test suite. Install the repository as `BattlePetUtility` in the Retail AddOns directory, ensure `RGX-Framework` is installed, run `/reload`, and exercise the HUD, loadouts, context menus, item buttons, pet battle transitions, and combat-lockdown recovery.
 - For a release, update `BattlePetUtility.toc` and the relevant documentation/changelog entries. Stable tags use `vX.Y.Z`; `.github/workflows/release.yml` validates the tag against the TOC version and packages with BigWigsMods/packager. Branch pushes to `dev` and `alpha` produce their corresponding channels.
+
+## Repository Workflow
+
+- The GitLab project under `rgxmods/warcraft` is authoritative. Normal work belongs on task branches and must merge through GitLab merge requests, never directly to the default branch.
+- Shared CI is included from `rgxmods/warcraft/RGX-Framework` at `/.gitlab/ci/addon.yml`; validation must pass before publishing to the GitHub mirror.
+- The GitHub `RGXMods` repository is downstream distribution, not development authority.
+- Keep GitLab and GitHub release tags identical, and use protected GitLab release tags.
+- Preserve any existing working Wago connection and ID exactly. Never create a new Wago connection without explicit user direction.
+- Publishing integrations prohibited by the shared validation policy are retired and must not be restored.
+- The root `README.md` must remain detailed and project-specific. Narrow distribution edits must not replace or truncate installation, features, compatibility, usage, media, or support content.
+- Verify relative README assets. Do not overwrite newer compatibility facts with stale monorepo or history text.
